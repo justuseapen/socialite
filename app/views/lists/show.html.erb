@@ -1,0 +1,51 @@
+<div class="col-md-offset-1 col-md-10">
+	<h1><%= @list.name %></h1>
+
+	<p>What percentage of top posts would you like to see from each account?</p>
+	<input 
+		id="topTweetLimit" 
+		data-slider-id='topTweetLimitSlider' 
+		type="text" 
+		data-slider-min="1" 
+		data-slider-max="100" 
+		data-slider-step="1" 
+		data-slider-value="14"/>
+
+	<script type="text/javascript">
+		$('#topTweetLimit').slider({
+			formatter: function(value) {
+				return value + "%";
+			}
+		});
+		$('#topTweetLimit').slider()
+			.on('slideStop', function(){
+				$.ajax({
+	        url: 'http://localhost:3000/users',
+	        type: "GET",
+	        data: value,
+	        dataType: 'json'
+	    	})
+			});
+
+
+	</script>
+
+	<div class="well">
+		<table class="table">
+		<% @list.twitter_accounts.each do |ta| %>
+			<tr>
+				<td><%= ta.handle %></td>
+			<% ta.good_tweets_since(48.hours.ago).each do |tweet| %>
+				<td><%= tweet.text %></td>
+				<td>
+					<input type="checkbox"/>
+				</td>
+			<% end %>
+			</tr>
+		<% end %>
+		</table>
+		<input type="submit" />
+	</div>
+
+	<%= link_to "Add Twitter Account", { controller: "twitter_accounts", action: "new", list_id: @list.id } %>
+</div>

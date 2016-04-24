@@ -1,0 +1,19 @@
+<div class="col-md-offset-1 col-md-10">
+
+	<h1>Lists</h1>
+	<div class="well">
+		<table class="table">
+			<thead>
+				<th>
+					
+				</th>
+			</thead>
+			<% @lists.each do |list| %>
+				<tr>
+					<td><%= link_to list.name, list_path(list) %></td>
+				</tr>
+			<% end %>
+		</table>
+		<%= link_to 'New List', new_list_path, class: "btn btn-default" %>
+	</div>
+</div>
