@@ -4,16 +4,26 @@
 	<div class="well">
 		<table class="table">
 			<thead>
-				<th>
-					
-				</th>
+				<th>List Name</th>
+				<th># of Accounts</th>
 			</thead>
 			<% @lists.each do |list| %>
 				<tr>
 					<td><%= link_to list.name, list_path(list) %></td>
+					<td><%= list.twitter_accounts.count %></td>
 				</tr>
 			<% end %>
 		</table>
 		<%= link_to 'New List', new_list_path, class: "btn btn-default" %>
+	</div>
+	<h1>Profiles</h1>
+	<div class="well">
+		<% if @buffer_profiles.blank? %>
+			<%= link_to 'Add Profiles', new_buffer_profiles_path, class: "btn btn-default" %>
+		<% else %>
+			<% @buffer_profiles.each do |p| %>
+				<%= p.formatted_username unless nil %>
+			<% end %>
+		<% end %>
 	</div>
 </div>

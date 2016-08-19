@@ -1,6 +1,7 @@
 class ListsController < ApplicationController
 	def index
 		@lists = List.all unless nil
+		@buffer_profiles = BufferProfile.all unless nil
 	end
 
 	def new

@@ -1,0 +1,22 @@
+<div class="col-md-offset-1 col-md-10">
+	<h1>Available Buffer profiles</h1>
+	<!-- Display Buffer Profiles from Buffer -->
+	<% @buffer_profiles.each do |p| %>
+		<div class="well">
+			<%= p.formatted_username %>
+			<% unless p.active %>
+				<%= link_to "Add", buffer_profiles_path(
+						formatted_username:p.formatted_username,
+						buffer_id: p.buffer_id
+						), 
+					method: :post 
+				%>
+			<% else %>
+				<%= link_to "Remove", buffer_profiles_path(id: BufferProfile.where(buffer_id: p.buffer_id).take.id), 
+					method: :delete 
+				%>
+			<% end %>
+		</div>
+	<% end %>
+
+</div>
