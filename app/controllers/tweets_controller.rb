@@ -1,11 +1,10 @@
 class TweetsController < ApplicationController
 	def index
-		list = List.find(params[:list_id])
-		@tweets = list.top_tweets(params[:quality_percentage])
+		puts "PARAMS: #{params.inspect}"
+		list = List.find(params[:tweets][:list])
+		@tweets = list.top_tweets(params[:tweets][:quality_percentage])
+		respond_to do |format|
+			format.json { render  :json => { tweets: @tweets.to_json } }
+		end
 	end
-	private
-	def params
-		params.require(:tweets).permit(:quality_percentage, :list_id)
-	end
-	
 end

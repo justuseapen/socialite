@@ -5,7 +5,9 @@ class List < ActiveRecord::Base
 	def top_tweets(percentage_integer)
 		tweets = []
 		twitter_accounts.each do |ta|
-			tweets << ta.top_tweets(percentage_integer)
+			tweets = tweets + ta.top_tweets(percentage_integer)
 		end
+		tweets
 	end
+
 end

@@ -12,37 +12,69 @@
 		data-slider-value="14"/>
 
 	<script type="text/javascript">
+		function updateTweets(response){
+			console.log(response.tweets)
+			var tweetsJSON = JSON.parse(response.tweets)
+			var html = ""
+			$.each(tweetsJSON,function(){
+				var row = ""
+				var account = this.user.screen_name
+				var text = this.text
+				row = "<tr><td>" + account + "</td><td>" + text + "</td><td><input type=\"checkbox\"/></td>"
+				html = html.concat(row)
+			})
+			console.log(html)
+			$('tbody').html(html)
+		}
+
 		$('#topTweetLimit').slider({
 			formatter: function(value) {
 				return value + "%";
 			}
 		});
-		$('#topTweetLimit').slider()
-			.on('slideStop', function(){
-				$.ajax({
-	        url: 'http://localhost:3000/users',
-	        type: "GET",
-	        data: value,
-	        dataType: 'json'
-	    	})
-			});
+		$('#topTweetLimit').slider();
+		$('#topTweetLimit').on('slideStop', function(stop){
+			console.log("slidestop")
+			$.ajax({
+        url: 'http://localhost:3000/tweets',
+        type: "GET",
+        data: {
+        	tweets: {
+	        	list: <%= @list.id %>,
+  	      	topPercentage: stop.value
+  	      },
+        },
+        dataType: 'json',
+        success: function(response){
+        	console.log(response);
+        	updateTweets(response);
+        }
+    	})
+		});
 
 
 	</script>
 
 	<div class="well">
-		<table class="table">
-		<% @list.twitter_accounts.each do |ta| %>
-			<tr>
-				<td><%= ta.handle %></td>
-			<% ta.good_tweets_since(48.hours.ago).each do |tweet| %>
-				<td><%= tweet.text %></td>
-				<td>
-					<input type="checkbox"/>
-				</td>
-			<% end %>
-			</tr>
-		<% end %>
+		<table class="table top-tweets">
+			<thead>
+				<th>Account</th>
+				<th>Tweet</th>
+				<th>Add to Buffer</th>
+			</thead>
+			<tbody>
+				<% @list.twitter_accounts.each do |ta| %>
+					<% ta.good_tweets_since(48.hours.ago).each do |tweet| %>
+						<tr>
+							<td><%= ta.handle %></td>
+							<td><%= tweet.text %></td>
+							<td>
+								<input type="checkbox"/>
+							</td>
+						</tr>
+					<% end %>
+				<% end %>
+			</tbody>
 		</table>
 		<input type="submit" />
 	</div>
