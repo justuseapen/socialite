@@ -10,3 +10,6 @@ gem 'twitter'
 gem 'simple_form'
 gem 'dotenv-rails', :groups => [:development, :test]
 gem 'sass-rails'
+gem 'byebug', :groups => [:development, :test]
+gem 'puma'
+gem 'buffer', :github => 'bufferapp/buffer-ruby'
