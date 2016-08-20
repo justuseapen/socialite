@@ -3,6 +3,7 @@ class List < ActiveRecord::Base
 	belongs_to :buffer_profile
 
 	def top_tweets(percentage_integer)
+		puts "Pulling top tweets"
 		tweets = []
 		twitter_accounts.each do |ta|
 			tweets = tweets + ta.top_tweets(percentage_integer)

@@ -26,14 +26,16 @@ class TwitterAccount < ActiveRecord::Base
 	end
 
 	def tweets_since(datetime)
-		tweets = []
-		options = {count: 50, include_rts: false, exclude_replies: true}
-		$twitter.user_timeline(self.handle, options).each do |t|
-			if t.created_at > datetime
-				tweets << t
+		APICache.get('tweets_since', { cache: 3600, timeout: 10 }) do
+	  	tweets = []
+			options = {count: 50, include_rts: false, exclude_replies: true}
+			$twitter.user_timeline(self.handle, options).each do |t|
+				if t.created_at > datetime
+					tweets << t
+				end
 			end
+			tweets
 		end
-		tweets
 	end
 
 	def good_tweets_since(datetime)

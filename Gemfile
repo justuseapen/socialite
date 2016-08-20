@@ -13,3 +13,5 @@ gem 'sass-rails'
 gem 'byebug', :groups => [:development, :test]
 gem 'puma'
 gem 'buffer', :github => 'bufferapp/buffer-ruby'
+gem 'api_cache'
+gem 'moneta'
