@@ -21,11 +21,16 @@ class TwitterAccount < ActiveRecord::Base
 	end
 
 	def last(number_of_tweets)
-		options = {count: number_of_tweets, include_rts: false, exclude_replies: true}
-		$twitter.user_timeline(self.handle, options)
+		# Cache the the call for an hour to save time on regular useage.
+		APICache.get('last', { cache: 3600, timeout: 10 }) do
+			options = {count: number_of_tweets, include_rts: false, exclude_replies: true}
+			$twitter.user_timeline(self.handle, options)
+		end
+
 	end
 
 	def tweets_since(datetime)
+		# Cache the the call for an hour to save time on regular useage.
 		APICache.get('tweets_since', { cache: 3600, timeout: 10 }) do
 	  	tweets = []
 			options = {count: 50, include_rts: false, exclude_replies: true}
