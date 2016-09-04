@@ -7,6 +7,13 @@ class TwitterAccount < ActiveRecord::Base
 		end
 	end
 
+	# Retrieve account details from twitter
+	def retrieve_account_details
+		account = $twitter.user("#{self.handle}")
+		self.name = account.name
+		self.avatar_url = account.profile_image_uri
+	end
+
 	def top_tweets(percentage_integer)
 		tweets = tweets_since(48.hours.ago)
 		array_length = tweets.length
