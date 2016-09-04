@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20160818204713) do
   create_table "buffer_profiles", force: :cascade do |t|
     t.string   "formatted_username"
     t.string   "buffer_id"
+    t.string   "avatar_url"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
@@ -33,6 +34,8 @@ ActiveRecord::Schema.define(version: 20160818204713) do
   create_table "twitter_accounts", force: :cascade do |t|
     t.integer  "list_id"
     t.string   "handle",     null: false
+    t.string   "name"
+    t.string   "avatar_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
