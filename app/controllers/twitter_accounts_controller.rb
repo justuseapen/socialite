@@ -6,6 +6,8 @@ class TwitterAccountsController < ApplicationController
 
 	def create
 		@twitter_account = TwitterAccount.create(twitter_account_params)
+		@twitter_account.retrieve_account_details
+		@twitter_account.save
 		@list = @twitter_account.list_id
 		redirect_to list_path(@list)
 	end
