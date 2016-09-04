@@ -1,3 +1,62 @@
 #ex1Slider .slider-selection {
 	background: #BABABA;
 }
+
+/* LIST SHOW */
+
+.account-avatar {
+	display: inline-block;
+}
+
+.account-details {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.account-details p {
+	margin: 0;
+}
+
+.card-table {
+	padding:0;
+	border: 0;
+}
+
+.card {
+	padding: 0;
+	background-color: white;
+	width: 100%;
+}
+
+.card .tweet-image {
+	display: inline-block;
+	padding: 0;
+}
+
+.card .tweet-text {
+	padding-top: 1em;
+}
+
+.card .tweet-stats {
+}
+
+.tweet-favorites {
+	display: inline-block;
+}
+
+.tweet-retweets {
+	display: inline-block;
+}
+
+.card .tweet-buffer {
+	display: inline-block;
+	padding-top: 1em;
+}
+
+.tweet {
+	margin:0;
+}
+
+.account-name p{
+	font-weight: 900;
+}

@@ -11,73 +11,63 @@
 		data-slider-step="1" 
 		data-slider-value="14"/>
 
-	<script type="text/javascript">
-		function updateTweets(response){
-			console.log(response.tweets)
-			var tweetsJSON = JSON.parse(response.tweets)
-			var html = ""
-			$.each(tweetsJSON,function(){
-				var row = ""
-				var account = this.user.screen_name
-				var text = this.text
-				row = "<tr><td>" + account + "</td><td>" + text + "</td><td><input type=\"checkbox\"/></td>"
-				html = html.concat(row)
-			})
-			console.log(html)
-			$('tbody').html(html)
-		}
-
-		$('#topTweetLimit').slider({
-			formatter: function(value) {
-				return value + "%";
-			}
-		});
-		$('#topTweetLimit').slider();
-		$('#topTweetLimit').on('slideStop', function(stop){
-			console.log("slidestop")
-			$.ajax({
-        url: 'http://localhost:3000/tweets',
-        type: "GET",
-        data: {
-        	tweets: {
-	        	list: <%= @list.id %>,
-  	      	topPercentage: stop.value
-  	      },
-        },
-        dataType: 'json',
-        success: function(response){
-        	console.log(response);
-        	updateTweets(response);
-        }
-    	})
-		});
+	<%= javascript_include_tag "show_list" %> 
 
 
-	</script>
+	<% @list.twitter_accounts.each do |account| %>
 
-	<div class="well">
-		<table class="table top-tweets">
-			<thead>
-				<th>Account</th>
-				<th>Tweet</th>
-				<th>Add to Buffer</th>
-			</thead>
-			<tbody>
-				<% @list.twitter_accounts.each do |ta| %>
-					<% ta.good_tweets_since(48.hours.ago).each do |tweet| %>
-						<tr>
-							<td><%= ta.handle %></td>
-							<td><%= tweet.text %></td>
-							<td>
-								<input type="checkbox"/>
-							</td>
-						</tr>
-					<% end %>
-				<% end %>
-			</tbody>
-		</table>
-		<input type="submit" />
-	</div>
+		<!-- account card -->
+		<div class="account-card well card-table">
+
+			<div class="account-avatar">
+				<img src="<%= account.avatar_url%>" class="avatar">
+			</div>
+
+			<div class="account-details">
+				<div class="account-name">
+					<p>
+						<%= account.name %>
+					</p>
+				</div>
+				<div class="account-screenname">
+					<em>
+						@<%= account.handle %>
+					</em>
+				</div>
+			</div>
+
+			<div class="account-top-tweets">
+				<div class="tweet row well well-sm card">
+					<div class="tweet-image col-sm-2">
+						<img src="<%= asset_path("sample.png") %>">
+					</div>
+					<div class="col-sm-8">
+						<div class="tweet-text">
+							<p>Marx had terrible marks! https://t.co/ArkjSI3Dqo</p>
+						</div>
+						<div class="tweet-stats">
+							<div class="tweet-favorites">
+								<%= fa_icon "star" %>
+								1234
+							</div>
+							<div class="tweet-retweets">
+								<%= fa_icon "retweet" %>
+								124
+							</div>
+						</div>
+					</div>
+					<div class="tweet-buffer col-sm-2">
+						<label>Add to Buffer:</label>
+						<div class="center">
+							<input type="checkbox" name="addTweetToBuffer">
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	<% end %>
 
 	<%= link_to "Add Twitter Account", { controller: "twitter_accounts", action: "new", list_id: @list.id } %>
 </div>
