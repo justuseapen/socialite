@@ -13,4 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-slider.min.js
+//= require show_list.js
 //= require_tree .
