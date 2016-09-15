@@ -16,7 +16,6 @@ gem 'buffer', :github => 'bufferapp/buffer-ruby'
 gem 'api_cache'
 gem 'moneta'
 gem 'font-awesome-rails'
-gem 'rename'
 
 group :development do
   gem 'web-console'
