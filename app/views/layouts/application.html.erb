@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Zach's Twitter Tool</title>
+  <title>Socialite</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<div class="centered"><%= link_to " Z", root_path %></div>
+	<div class="centered"><%= link_to "Socialite", root_path %></div>
 	<% flash.each do |k,v| %>
 		<div class="alert alert-#{k}">
 			<%= v %>
