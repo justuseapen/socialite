@@ -15,6 +15,7 @@ class ListsController < ApplicationController
 
 	def show
 		@list = List.find(params[:id])
+		@buffer_profile = @list.buffer_profile
 		respond_to do |format|
 			format.json { render  :json => { list: @list.to_json } }
 			format.html

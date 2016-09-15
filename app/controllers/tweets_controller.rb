@@ -2,7 +2,7 @@ class TweetsController < ApplicationController
 	def index
 		puts "PARAMS: #{params.inspect}"
 		list = List.find(params[:tweets][:list])
-		@tweets = list.top_tweets(params[:tweets][:quality_percentage])
+		@tweets = list.top_tweets(params[:tweets][:topPercentage])
 		respond_to do |format|
 			format.json { render  :json => { tweets: @tweets.to_json } }
 		end

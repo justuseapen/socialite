@@ -60,3 +60,7 @@
 .account-name p{
 	font-weight: 900;
 }
+
+#bufferTweets {
+	float:right;
+}

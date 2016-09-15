@@ -1,50 +1,111 @@
-// On load:
-// For each account in list
-// Pull top 14% of tweets 
-// Populate UI
+var listId = parseInt($(".list").attr('id'))
 
-
-
-
-
-function updateTweets(response){
-	console.log(response.tweets)
-	var tweetsJSON = JSON.parse(response.tweets)
-	var html = ""
-	$.each(tweetsJSON,function(){
-		var row = ""
-		var account = this.user.screen_name
-		var text = this.text
-		row = "<tr><td>" + account + "</td><td>" + text + "</td><td><input type=\"checkbox\"/></td>"
-		html = html.concat(row)
-	})
-	console.log(html)
-	$('tbody').html(html)
+function addTweetsToBufferQueue(tweets) {
+	$.ajax({
+	    url: '/updates',
+	    type: "POST",
+	    data: {
+	    	listId: listId,
+	    	tweetIds: tweets
+	    },
+	    dataType: 'json',
+	    success: function(response){
+	    	console.log("POSTed updates");
+	    }
+		})
 }
 
-$('#topTweetLimit').slider({
-	formatter: function(value) {
-		return value + "%";
+function gatherCheckedTweets() {
+	var checkedTweetIDs = []
+	$(".selectTweet").each( function(){
+		if(this.checked){
+			checkedTweetIDs.push(this.id)
+		}
+	});
+	return checkedTweetIDs
+}
+
+function bufferTweets(){
+	var tweets = gatherCheckedTweets();
+	addTweetsToBufferQueue(tweets);
+}
+
+$( document ).ready(function(){
+
+	$('#topTweetLimit').slider({
+		formatter: function(value) {
+			return value + "%";
+		}
+	});
+
+	$('#topTweetLimit').slider();
+
+	function populateTweets(response){
+		$('.tweet').remove();
+		var tweetsJSON = JSON.parse(response.tweets);
+		$.each(tweetsJSON,function(){
+			console.log(this)
+			var tweetImageURL = ""
+			var tweetText = this.text
+			var tweetFavorites = this.favorite_count
+			var tweetRetweets = this.retweet_count
+			var tweetID = this.id_str
+			var tweetHTML = "\
+				<div class=\"tweet row well well-sm card\">\
+						<div class=\"tweet-image col-sm-2\">\
+							<img src=\""+ tweetImageURL +"\">\
+						</div>\
+						<div class=\"col-sm-8\">\
+							<div class=\"tweet-text\">\
+								<p>"+ tweetText +"</p>\
+							</div>\
+							<div class=\"tweet-stats\">\
+								<div class=\"tweet-favorites\">\
+									<i class=\"fa fa-star\"></i>\
+									"+ tweetFavorites +"\
+								</div>\
+								<div class=\"tweet-retweets\">\
+									<i class=\"fa fa-retweet\"></i>\
+									"+ tweetRetweets +"\
+								</div>\
+							</div>\
+						</div>\
+						<div class=\"tweet-buffer col-sm-2\">\
+							<label>Add to Buffer:</label>\
+							<div class=\"center\">\
+								<input type=\"checkbox\" class=\"selectTweet\" name=\"addTweetToBuffer\" id=\""+ tweetID +"\">\
+							</div>\
+						</div>\
+					</div>"
+			$("#" + this.user.screen_name).append(tweetHTML);
+		});
 	}
-});
 
-$('#topTweetLimit').slider();
+	function fetchTweets(topPercentage) {
+		console.log('Fetching tweets for list ' + listId)
+		// Get tweets
+		$.ajax({
+	    url: '/tweets',
+	    type: "GET",
+	    data: {
+	    	tweets: {
+	      	list: listId,
+	      	topPercentage: topPercentage
+	      },
+	    },
+	    dataType: 'json',
+	    success: function(response){
+	    	console.log("ajax complete");
+	    	populateTweets(response);
+	    }
+		})
+	}
 
-$('#topTweetLimit').on('slideStop', function(stop){
-	console.log("slidestop")
-	$.ajax({
-    url: 'http://localhost:3000/tweets',
-    type: "GET",
-    data: {
-    	tweets: {
-      	list: <%= @list.id %>,
-      	topPercentage: stop.value
-      },
-    },
-    dataType: 'json',
-    success: function(response){
-    	console.log(response);
-    	updateTweets(response);
-    }
-	})
+	fetchTweets(14);
+
+	$('#topTweetLimit').on('slideStop',function(e){
+		console.log(e.value);
+		fetchTweets(e.value);
+	});
+
 });

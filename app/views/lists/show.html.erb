@@ -1,7 +1,8 @@
-<div class="col-md-offset-1 col-md-10">
+<div class="col-md-offset-1 col-md-10 list" id="<%= @list.id %>">
 	<h1><%= @list.name %></h1>
 
 	<p>What percentage of top posts would you like to see from each account?</p>
+	
 	<input 
 		id="topTweetLimit" 
 		data-slider-id='topTweetLimitSlider' 
@@ -11,63 +12,32 @@
 		data-slider-step="1" 
 		data-slider-value="14"/>
 
-	<%= javascript_include_tag "show_list" %> 
-
-
 	<% @list.twitter_accounts.each do |account| %>
-
-		<!-- account card -->
-		<div class="account-card well card-table">
-
-			<div class="account-avatar">
-				<img src="<%= account.avatar_url%>" class="avatar">
-			</div>
-
-			<div class="account-details">
-				<div class="account-name">
-					<p>
-						<%= account.name %>
-					</p>
-				</div>
-				<div class="account-screenname">
-					<em>
-						@<%= account.handle %>
-					</em>
-				</div>
-			</div>
-
+		<div class="well card-table">
+			<div class="account-card" id="<%= account.handle %>">
+ 				<div class="account-avatar">
+ 					<img src="<%= account.avatar_url %>" class="avatar">
+ 				</div>
+ 				<div class="account-details">
+ 					<div class="account-name">
+ 						<p><%= account.name %>
+ 						</p>
+ 					</div>
+ 					<div class="account-screenname">
+ 						<em><%= account.handle %>
+ 						</em>
+ 					</div>
+ 				</div>
+ 			</div>
 			<div class="account-top-tweets">
-				<div class="tweet row well well-sm card">
-					<div class="tweet-image col-sm-2">
-						<img src="<%= asset_path("sample.png") %>">
-					</div>
-					<div class="col-sm-8">
-						<div class="tweet-text">
-							<p>Marx had terrible marks! https://t.co/ArkjSI3Dqo</p>
-						</div>
-						<div class="tweet-stats">
-							<div class="tweet-favorites">
-								<%= fa_icon "star" %>
-								1234
-							</div>
-							<div class="tweet-retweets">
-								<%= fa_icon "retweet" %>
-								124
-							</div>
-						</div>
-					</div>
-					<div class="tweet-buffer col-sm-2">
-						<label>Add to Buffer:</label>
-						<div class="center">
-							<input type="checkbox" name="addTweetToBuffer">
-						</div>
-					</div>
-				</div>
 			</div>
-
 		</div>
-
 	<% end %>
+
+	<%= link_to "Add tweets to buffer queue for #{ @buffer_profile.formatted_username }", "#", class: "btn btn-default", id: "bufferTweets", onClick: "bufferTweets(); event.preventDefault();" %>
 
 	<%= link_to "Add Twitter Account", { controller: "twitter_accounts", action: "new", list_id: @list.id } %>
 </div>
+
+<%= javascript_include_tag "show_list" %>
+

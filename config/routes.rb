@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   resource :twitter_accounts
   resource :buffer_profiles
   get '/tweets', to: 'tweets#index', as: 'tweets'
+  post '/updates', to: 'updates#create', as: 'create_update'
 end

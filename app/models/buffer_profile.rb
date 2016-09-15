@@ -2,6 +2,35 @@ class BufferProfile < ActiveRecord::Base
 	has_many :lists
 	attr_accessor :active
 
+	def update_queue_with(tweetIds)
+		puts "updating buffer queue"
+		updates = []
+		successful_updates = 0
+		failed_updates = 0
+		tweets = $twitter.statuses(tweetIds)
+		tweets.each do |tweet|
+			puts "buffering #{ tweet.text }"
+			update = $buffer.create_update(
+				body:{
+					text: tweet.text,
+					profile_ids:[ buffer_id ]
+				}
+			)
+			updates << update
+			if update.success?
+				successful_updates += 1
+			else
+				failed_updates += 1
+			end
+		end
+		response = {
+			updates: updates,
+			successful_updates: successful_updates,
+			failed_updates: failed_updates
+		}
+	end
+
+	# Gets current user's available buffer profiles that list "twitter as service"
 	def self.pull
 		profiles_from_api = $buffer.profiles
 		profiles_array = []

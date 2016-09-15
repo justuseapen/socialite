@@ -38,7 +38,7 @@ class TwitterAccount < ActiveRecord::Base
 
 	def tweets_since(datetime)
 		# Cache the the call for an hour to save time on regular useage.
-		APICache.get('tweets_since', { cache: 3600, timeout: 10 }) do
+		APICache.get("tweets_since_for#{ self.handle }", { cache: 3600, timeout: 10 }) do
 	  	tweets = []
 			options = {count: 50, include_rts: false, exclude_replies: true}
 			$twitter.user_timeline(self.handle, options).each do |t|
