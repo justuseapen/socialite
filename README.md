@@ -12,15 +12,7 @@ They select their favorites to add to Buffer.
 Up Next
 =======
 
-* Cache tweet data on home page.
-* Redesign list show view
-	- show list.twitter_accounts
-		- twitter_acccount.avatar
-		- twitter_account.name
-		- twitter_account.screen_name
-		- tweets
-			- tweet.image
-			- tweet.text
-			- tweet.favorites
-			- tweet.retweets
-			- tweet.add_to_buffer_queue_for(list.buffer_profile)
+* If there are no recent tweets, pull all-time best tweets
+* Handle images
+* Handle user log in with buffer
+
