@@ -64,3 +64,9 @@
 #bufferTweets {
 	float:right;
 }
+
+img {
+	width: 100%;
+	height: auto;
+}
+
