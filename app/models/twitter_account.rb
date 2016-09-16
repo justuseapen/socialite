@@ -21,6 +21,9 @@ class TwitterAccount < ActiveRecord::Base
 	# 	and rate limiting could (will) be an issue
 	def top_tweets(percentage_integer)
 		tweets = tweets_since(48.hours.ago)
+		if tweets.length < 1
+			tweets = last(200)
+		end
 		array_length = tweets.length
 		perentage_float = percentage_integer.to_f / 100
 		top_length = array_length.to_f * perentage_float
