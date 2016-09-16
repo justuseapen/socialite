@@ -81,6 +81,7 @@ $( document ).ready(function(){
 							</div>\
 						</div>\
 					</div>"
+			$("#" + this.user.screen_name.toLowerCase()).append(tweetHTML);
 		});
 	}
 
