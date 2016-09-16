@@ -9,7 +9,8 @@ class ListsController < ApplicationController
 	end
 
 	def create
-		@list = List.create(list_params)
+		@buffer_profile = BufferProfile.find(list_params['buffer_profile'].to_i)
+		@list = List.create(name:list_params['name'],buffer_profile:@buffer_profile)
 		redirect_to lists_path
 	end
 
