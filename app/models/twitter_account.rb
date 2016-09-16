@@ -14,6 +14,11 @@ class TwitterAccount < ActiveRecord::Base
 		self.avatar_url = account.profile_image_uri
 	end
 
+	# Always gets tweets from last 48 hours.
+	# If there are no tweets from the last two days
+	# 	Pull all-time top tweets
+	# 	You can pull up to 3200 tweets, 200 at a time per account
+	# 	and rate limiting could (will) be an issue
 	def top_tweets(percentage_integer)
 		tweets = tweets_since(48.hours.ago)
 		array_length = tweets.length
@@ -36,6 +41,7 @@ class TwitterAccount < ActiveRecord::Base
 
 	end
 
+	# Gets tweets for an account since a given time.
 	def tweets_since(datetime)
 		# Cache the the call for an hour to save time on regular useage.
 		APICache.get("tweets_since_for#{ self.handle }", { cache: 3600, timeout: 10 }) do
