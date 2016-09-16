@@ -45,7 +45,11 @@ $( document ).ready(function(){
 		var tweetsJSON = JSON.parse(response.tweets);
 		$.each(tweetsJSON,function(){
 			console.log(this)
-			var tweetImageURL = ""
+			// Only pulling the first image, need to correct this:
+			tweetImageURL = "";
+			if(typeof this.entities.media !== "undefined"){
+				tweetImageURL = this.entities.media[0].media_url
+			}
 			var tweetText = this.text
 			var tweetFavorites = this.favorite_count
 			var tweetRetweets = this.retweet_count
@@ -77,7 +81,6 @@ $( document ).ready(function(){
 							</div>\
 						</div>\
 					</div>"
-			$("#" + this.user.screen_name).append(tweetHTML);
 		});
 	}
 
