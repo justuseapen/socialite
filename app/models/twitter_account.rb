@@ -25,8 +25,8 @@ class TwitterAccount < ActiveRecord::Base
 			tweets = last(200)
 		end
 		array_length = tweets.length
-		perentage_float = percentage_integer.to_f / 100
-		top_length = array_length.to_f * perentage_float
+		percentage_float = percentage_integer.to_f / 100
+		top_length = array_length.to_f * percentage_float
 		ranked = ranked_by_score(tweets)
 		tweets = ranked[0..top_length - 1]
 	end
