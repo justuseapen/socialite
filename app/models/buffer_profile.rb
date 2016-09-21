@@ -5,26 +5,31 @@ class BufferProfile < ActiveRecord::Base
 	def update_queue_with(tweetIds)
 		puts "updating buffer queue"
 		updates = []
-		successful_updates = 0
-		failed_updates = 0
+		successful_updates = []
+		failed_updates = []
 		tweets = $twitter.statuses(tweetIds)
 		tweets.each do |tweet|
 			puts "buffering #{ tweet.text }"
+			if tweet.media[0].blank?
+				media_url = ""
+			else
+				media_url = tweet.media[0].media_url
+			end
 			update = $buffer.create_update(
 				body:{
 					text: tweet.text,
+					media: media_url,
 					profile_ids:[ buffer_id ]
 				}
 			)
 			updates << update
 			if update.success?
-				successful_updates += 1
+				successful_updates << update
 			else
-				failed_updates += 1
+				failed_updates << update
 			end
 		end
 		response = {
-			updates: updates,
 			successful_updates: successful_updates,
 			failed_updates: failed_updates
 		}
