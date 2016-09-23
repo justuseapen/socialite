@@ -16,6 +16,8 @@ gem 'buffer', :github => 'bufferapp/buffer-ruby'
 gem 'api_cache'
 gem 'moneta'
 gem 'font-awesome-rails'
+gem 'omniauth-buffer2'
+gem 'devise', '~> 3.4.0'
 
 group :development do
   gem 'web-console'
