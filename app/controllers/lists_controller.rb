@@ -1,7 +1,11 @@
 class ListsController < ApplicationController
+	include ListsHelper
+	before_action :authenticate_user!, :buffer_connected?
+	before_action :check_for_profiles, only: [:index]
+	
 	def index
-		@lists = List.all unless nil
-		@buffer_profiles = BufferProfile.all unless nil
+		@buffer_profiles = current_user.buffer_profiles unless nil
+		@lists = current_user.lists unless nil
 	end
 
 	def new
@@ -9,9 +13,18 @@ class ListsController < ApplicationController
 	end
 
 	def create
+		@user = current_user
 		@buffer_profile = BufferProfile.find(list_params['buffer_profile'].to_i)
-		@list = List.create(name:list_params['name'],buffer_profile:@buffer_profile)
-		redirect_to lists_path
+		@list = List.create(name:list_params['name'],
+			buffer_profile:@buffer_profile,
+			user: @user)
+		if @list.save
+			flash[:success] = "You've made a new list!"
+			redirect_to lists_path
+		else
+			flash[:failure] = "Something went wrong"
+			redirect_to new_list_path
+		end
 	end
 
 	def show

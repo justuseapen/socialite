@@ -7,9 +7,10 @@
 			<% unless p.active %>
 				<%= link_to "Add", buffer_profiles_path(
 						formatted_username:p.formatted_username,
-						buffer_id: p.buffer_id
+						buffer_id: p.buffer_id,
+						buffer_account_id: @buffer_account.id
 						), 
-					method: :post 
+					method: :patch 
 				%>
 			<% else %>
 				<%= link_to "Remove", buffer_profiles_path(id: BufferProfile.where(buffer_id: p.buffer_id).take.id), 

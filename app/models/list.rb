@@ -1,6 +1,7 @@
 class List < ActiveRecord::Base
 	has_many :twitter_accounts
 	belongs_to :buffer_profile
+	belongs_to :user
 	validates :buffer_profile, presence: true
 
 	# Pulls top tweets for whole list (many accounts)
