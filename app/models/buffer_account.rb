@@ -1,18 +1,30 @@
 class BufferAccount < ActiveRecord::Base
 	belongs_to :user
-	after_save :pull_and_save_profiles
+	before_save :pull_and_save_profiles
 	has_many :buffer_profiles
 	validates :access_token, presence: true
 	validates :uid, presence: true
+	validates :user_id, presence: true
 
+	# So that we can save profiles from buffer
+  def sanitized_profile_parameters(from_buffer)
+  	serialized_profile_parameters = {
+  		buffer_account_id: self.id,
+  		buffer_id: from_buffer.id,
+  		formatted_username: from_buffer.formatted_username,
+  		avatar_url: from_buffer.avatar,
+  	}
+  end
+	
+# Do this on account creation
 	def pull_and_save_profiles
 		profiles = pull_profiles
 		profiles.each do |p| 
-			p.buffer_account_id = self.id
-			p.save
+			BufferProfile.find_or_create_by(sanitized_profile_parameters(p))
 		end
 	end
 
+	# Buffer API Client
 	def client
     Buffer::Client.new(self.access_token)
   end
