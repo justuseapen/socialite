@@ -1,16 +1,26 @@
-<h2>Sign up</h2>
+<div class="row">
+	<div class="jumbotron col-md-8 col-md-offset-2">
+		<h1>Socialite helps you curate and queue great twitter content</h1>
+	</div>
+</div>
+<div class="row">
+	<div class="col-6-md col-md-offset-2">
+		<h2>Sign up</h2>
+		<%= devise_error_messages! %>
 
-<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
+		<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 
-  <div class="form-inputs">
-    <%= f.input :email, :required => true, :autofocus => true %>
-    <%= f.input :password, :required => true %>
-  </div>
+		  <div class="col-4-md">
+		    <%= f.input :email, :required => true, :autofocus => true, label: false, placeholder: "YourEmail@here.com", wrapper: :vertical_input_group  %>
+		    <%= f.input :password, :required => true, label: false, placeholder: "ReallySmartPasswordHere", wrapper: :vertical_input_group %>
+		  </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Next" %>
-  </div>
-<% end %>
+		  <div class="form-actions">
+		    <%= f.button :submit, "Next" %>
+		  </div>
 
-<%= render "devise/shared/links" %>
+		<% end %>
+
+		<%= render "devise/shared/links" %>
+	</div>
+</div>

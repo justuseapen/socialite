@@ -16,15 +16,11 @@
 		    <% if user_signed_in? %>
 				  <%= link_to("Logout of #{current_user.email}", destroy_user_session_path) %>        
 				<% else %>
-				  <%= link_to('Login', new_user_session_path)  %>  
+				  <%= link_to('Login', new_user_session_path, class: 'btn' ) %>  
 				<% end %>
 			</div>
 	  </div>
 	</nav>
-	<% flash.each do |k,v| %>
-		<div class="alert alert-#{k}">
-			<%= v %>
-		</div>
-	<% end %>
+ 	<%= render 'layouts/messages' %>
 	<%= yield %>
 </body>

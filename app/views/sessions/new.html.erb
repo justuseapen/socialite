@@ -1,15 +1,19 @@
-<h2>Sign in</h2>
+<div class="row">
+	<div class="col-6-md col-md-offset-2">
 
-<%= simple_form_for(@user, :as => @user, :url => session_path(@user)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email, :required => false, :autofocus => true %>
-    <%= f.input :password, :required => false %>
-  </div>
+		<h2>Sign in</h2>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Sign in" %>
-  </div>
-<% end %>
+		<%= simple_form_for(@user, :as => @user, :url => session_path(@user)) do |f| %>
+		  <div class="form-inputs">
+		    <%= f.input :email, :required => false, :autofocus => true, placeholder: "YourEmail@here.com", wrapper: :vertical_input_group  %>
+		    <%= f.input :password, :required => false, placeholder: "ReallySmartPasswordHere", wrapper: :vertical_input_group %>
+		  </div>
 
-<%= render "devise/shared/links" %>
- 
+		  <div class="form-actions">
+		    <%= f.button :submit, "Sign in" %>
+		  </div>
+		<% end %>
+
+		<%= render "devise/shared/links" %>
+	</div>
+</div>
