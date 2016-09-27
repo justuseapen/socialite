@@ -3,18 +3,24 @@
 <head>
   <title>Socialite</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <!-- <%= javascript_include_tag "application" %> -->
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="<%= controller_name %> <%= action_name %>">
 	<nav class="navbar navbar-default">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
 	      <%= link_to "Socialite", root_path, class: "navbar-brand" %>
 	    </div>
+	    <div class="navbar-right navbar-text">
+		    <% if user_signed_in? %>
+				  <%= link_to("Logout of #{current_user.email}", destroy_user_session_path, :method => :delete) %>        
+				<% else %>
+				  <%= link_to('Login', new_user_session_path)  %>  
+				<% end %>
+			</div>
 	  </div>
 	</nav>
-
 	<% flash.each do |k,v| %>
 		<div class="alert alert-#{k}">
 			<%= v %>
