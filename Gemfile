@@ -22,3 +22,7 @@ gem 'devise', '~> 3.4.0'
 group :development do
   gem 'web-console'
 end
+
+gem 'rails_12factor', group: :production
+
+ruby '2.3.1'
