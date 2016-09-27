@@ -2,12 +2,10 @@ class BufferProfilesController < ApplicationController
 	
 	def new
 		@buffer_account = current_user.buffer_account
-		@buffer_profiles = current_user.buffer_profiles
-		@inactive_buffer_profiles
+		@buffer_profiles = @buffer_account.pull_and_save_profiles
 	end
 
 	def create
-		byebug
 		p = BufferProfile.create(profile_params)
 		if p.save
 			flash[:success] = "You've added #{ p.formatted_username }!"
@@ -21,6 +19,10 @@ class BufferProfilesController < ApplicationController
 	def show
 		flash[:failure] = "Bug!"
 		redirect_to new_buffer_profiles_path
+	end
+
+	def update
+		@buffer_profile = BufferProfile.find
 	end
 
 	def destroy
