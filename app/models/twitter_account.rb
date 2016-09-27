@@ -1,5 +1,7 @@
 class TwitterAccount < ActiveRecord::Base
 	belongs_to :list
+	belongs_to :user
+	has_many :buffer_profiles
 
 	class Twitter::Tweet
 		def score
