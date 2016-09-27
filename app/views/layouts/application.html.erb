@@ -3,7 +3,7 @@
 <head>
   <title>Socialite</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <!-- <%= javascript_include_tag "application" %> -->
+  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body class="<%= controller_name %> <%= action_name %>">
@@ -14,7 +14,7 @@
 	    </div>
 	    <div class="navbar-right navbar-text">
 		    <% if user_signed_in? %>
-				  <%= link_to("Logout of #{current_user.email}", destroy_user_session_path, :method => :delete) %>        
+				  <%= link_to("Logout of #{current_user.email}", destroy_user_session_path) %>        
 				<% else %>
 				  <%= link_to('Login', new_user_session_path)  %>  
 				<% end %>
