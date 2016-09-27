@@ -1,5 +1,5 @@
 <%= simple_form_for @list do |f| %>
   <%= f.input :name %>
-  <%= f.input :buffer_profile, collection: BufferProfile.all, label_method: :formatted_username, input_method: :id %>
+  <%= f.input :buffer_profile, collection: @buffer_profiles, label_method: :formatted_username, input_method: :id %>
   <%= f.button :submit %>
 <% end %>
