@@ -1,6 +1,5 @@
 Socialite
 =========
-
 Socialite is a tool for social media entrpreneurs.
 
 Users select influencers in a niche.
@@ -9,10 +8,15 @@ The user filters for the influencer's most valuable content.
 
 They select their favorites to add to Buffer.
 
+Get Feedback on These:
+======================
+
+* As a user, I want to know which tweets I've already queued up so I don't repeat myself too many times?
+
 Up Next
 =======
 
-* Deploy to Heroku staging env
+* Style the auth pages
 
 * On buffering from list view:
 	- for success: display tweet as green
@@ -35,12 +39,29 @@ Up Next
 		- Downloading image to aws bucket
 		- use image url from aws
 
-* Handle user log in with buffer
-* Add multiple accounts to a list
+* Add multiple accounts to a list at one time
+
+* Check for uniqueness of account within a given list
+
 * On list view, pull all tweets for all accounts.
 	* Filter based on inputs by user (quality, timeframe)
 
-Get Feedback on These:
-======================
 
-* As a user, I want to know which tweets I've already queued up so I don't repeat myself too many times?
+DONE
+====
+* User logs in with buffer
+	- OAuth Protocol DONE
+		- Select "Login w/ Buffer" DONE
+		- Opens Buffer login dialogue DONE
+		- Enters buffer credentials DONE
+		- Buffer returns auth token DONE
+		- Use token in all calls to buffer DONE
+
+* Deploy to Heroku staging env
+
+* Buffer Profile Rearchitecture:
+- On first buffer connection
+	- add all buffer profiles for twitter as buffer_profiles on current user's 
+	- buffer_profile is not in db?
+		- buffer profile is "inactive"
+NOT REALLY DONE BUT SORT OF WORKS^^^
