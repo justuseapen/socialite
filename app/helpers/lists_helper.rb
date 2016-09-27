@@ -9,7 +9,6 @@ module ListsHelper
 
 	def check_for_profiles
 		if current_user.buffer_profiles.count < 1
-			byebug
 		end
 	end
 
