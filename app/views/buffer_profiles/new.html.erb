@@ -4,19 +4,6 @@
 	<% @buffer_profiles.each do |p| %>
 		<div class="well">
 			<%= p.formatted_username %>
-			<% unless p.active %>
-				<%= link_to "Add", buffer_profiles_path(
-						formatted_username:p.formatted_username,
-						buffer_id: p.buffer_id,
-						buffer_account_id: @buffer_account.id
-						), 
-					method: :patch 
-				%>
-			<% else %>
-				<%= link_to "Remove", buffer_profiles_path(id: BufferProfile.where(buffer_id: p.buffer_id).take.id), 
-					method: :delete 
-				%>
-			<% end %>
 		</div>
 	<% end %>
 
