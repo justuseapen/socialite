@@ -27,8 +27,12 @@
 		<% if @buffer_profiles.blank? %>
 			<p>You need to add a buffer profile.</p>
 		<% else %>
+			<ul>
 			<% @buffer_profiles.each do |p| %>
-				<%= p.formatted_username unless nil %>
+				<li class="profiles-index">
+					<img src="<%= p.avatar_url %>" class="profile-avatar">
+					<%= p.formatted_username unless nil %>		
+				</li>
 			<% end %>
 		<% end %>
 		<%= link_to 'Add Profiles', new_buffer_profiles_path, class: "btn btn-default" %>
