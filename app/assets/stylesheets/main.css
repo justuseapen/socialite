@@ -2,8 +2,25 @@
 	background: #BABABA;
 }
 
-/* LIST SHOW */
+/* LIST INDEX */
+.profiles-index{
+	list-style: none;
+}
 
+li.profiles-index {
+	padding-top: 1em;
+	padding-bottom: 1em;
+	display: inline-block;
+
+}
+
+.profile-avatar {
+	width: 33px;
+	height: 33px;
+	border-radius: 50%;
+}
+
+/* LIST SHOW */
 .account-avatar {
 	display: inline-block;
 }
