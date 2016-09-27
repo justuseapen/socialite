@@ -4,12 +4,13 @@ class ListsController < ApplicationController
 	before_action :check_for_profiles, only: [:index]
 	
 	def index
-		@buffer_profiles = current_user.buffer_profiles unless nil
+		@buffer_profiles = current_user.buffer_account.buffer_profiles
 		@lists = current_user.lists unless nil
 	end
 
 	def new
 		@list = List.new
+		@buffer_profiles = current_user.buffer_account.buffer_profiles
 	end
 
 	def create
