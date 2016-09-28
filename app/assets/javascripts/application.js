@@ -16,3 +16,9 @@
 //= require lists.js
 //= require nprogress
 //= require nprogress-ajax
+
+NProgress.configure({ 
+	showSpinner: false
+});
+
+
