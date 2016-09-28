@@ -16,7 +16,32 @@ Get Feedback on These:
 Up Next
 =======
 
-* Style the auth pages
+# Project Progress Bar
+- On bufferTweets
+	- Show progress bar
+		- On tweet_buffered:
+			- update the progress bar
+
+# Test Suite Project
+
+## Feature Tests
+1. User registers with email and password []
+2. User connects new account to buffer []
+3. User adds buffer profiles to Socialite []
+4. User creates a list []
+5. User adds twitter accounts to the list []
+6. User selects tweets from the list []
+7. User buffers tweets []
+8. User reviews updates []
+9. User sees progress bar while buffering tweets []
+
+## Unit Tests
+1. User
+2. Buffer Account
+3. Buffer Profile
+4. List
+5. Twitter Account
+
 
 * On buffering from list view:
 	- for success: display tweet as green
@@ -25,12 +50,11 @@ Up Next
 
 * If there are no recent tweets, pull all-time best tweets
 
-`
 	# If there are no tweets from the last two days
 	# 	Pull all-time top tweets
 	# 	You can pull up to 3200 tweets, 200 at a time per account
 	# 	and rate limiting could (will) be an issue
-`
+
 
 * Handle images
 	- Test: Buffer using entities.media[0].url
@@ -49,6 +73,8 @@ Up Next
 
 DONE
 ====
+* Style the auth pages DONE SORT OF
+
 * User logs in with buffer
 	- OAuth Protocol DONE
 		- Select "Login w/ Buffer" DONE
@@ -65,3 +91,5 @@ DONE
 	- buffer_profile is not in db?
 		- buffer profile is "inactive"
 NOT REALLY DONE BUT SORT OF WORKS^^^
+
+* Handling for Images DONE
