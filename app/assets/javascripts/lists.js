@@ -1,3 +1,8 @@
+$( document ).ajaxStart(function() {
+  NProgress.start();
+  console.log("Ajaxing");
+});
+
 var listId = parseInt($(".list").attr('id'))
 
 function flashUpdatesStatus(response){
