@@ -40,7 +40,9 @@ class BufferProfile < ActiveRecord::Base
 			update = client.create_update(
 				body:{
 					text: tweet.text,
-					media: media_url,
+					media: {
+						photo:media_url
+						},
 					profile_ids:[ buffer_id ]
 				}
 			)
