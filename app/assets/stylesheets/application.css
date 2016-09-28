@@ -15,5 +15,7 @@
  *= require bootstrap-slider.min
  *= require font-awesome
  *= require main
+ *= require nprogress
+ *= require nprogress-bootstrap
  *= require_self
  */

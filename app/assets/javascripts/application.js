@@ -14,3 +14,5 @@
 //= require jquery_ujs
 //= require bootstrap-slider.min.js
 //= require lists.js
+//= require nprogress
+//= require nprogress-ajax
