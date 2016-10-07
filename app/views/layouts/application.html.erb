@@ -12,7 +12,7 @@
 	    <div class="navbar-header">
 	      <%= link_to "Socialite", root_path, class: "navbar-brand" %>
 	    </div>
-	    <div class="navbar-right navbar-text">
+	    <div class="navbar-right">
 		    <% if user_signed_in? %>
 				  <%= link_to("Logout of #{current_user.email}", destroy_user_session_path) %>        
 				<% else %>
