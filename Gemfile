@@ -8,9 +8,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'twitter'
 gem 'simple_form'
-gem 'dotenv-rails', :groups => [:development, :test]
 gem 'sass-rails'
-gem 'byebug', :groups => [:development, :test]
 gem 'puma'
 gem 'buffer', :github => 'bufferapp/buffer-ruby'
 gem 'api_cache'
@@ -22,6 +20,17 @@ gem 'nprogress-rails'
 
 group :development do
   gem 'web-console'
+end
+
+group :development, :test do
+  gem 'factory_girl_rails'
+  gem 'dotenv-rails'
+  gem 'byebug'
+end
+
+group :test do
+  gem 'minitest-rails-capybara'
+  gem 'minitest-reporters'
 end
 
 gem 'rails_12factor', group: :production
