@@ -16,16 +16,10 @@ Get Feedback on These:
 Up Next
 =======
 
-# Project Progress Bar
-- On bufferTweets
-	- Show progress bar
-		- On tweet_buffered:
-			- update the progress bar
-
 # Test Suite Project
 
 ## Feature Tests
-1. User registers with email and password []
+1. User registers with email and password [✓]
 2. User connects new account to buffer []
 3. User adds buffer profiles to Socialite []
 4. User creates a list []
@@ -34,6 +28,8 @@ Up Next
 7. User buffers tweets []
 8. User reviews updates []
 9. User sees progress bar while buffering tweets []
+
+*Refactor the tests so that changes to copy don't break everything.*
 
 ## Unit Tests
 1. User
@@ -74,7 +70,6 @@ Up Next
 DONE
 ====
 * Style the auth pages DONE SORT OF
-
 * User logs in with buffer
 	- OAuth Protocol DONE
 		- Select "Login w/ Buffer" DONE
@@ -82,14 +77,12 @@ DONE
 		- Enters buffer credentials DONE
 		- Buffer returns auth token DONE
 		- Use token in all calls to buffer DONE
-
 * Deploy to Heroku staging env
-
 * Buffer Profile Rearchitecture:
 - On first buffer connection
 	- add all buffer profiles for twitter as buffer_profiles on current user's 
 	- buffer_profile is not in db?
 		- buffer profile is "inactive"
 NOT REALLY DONE BUT SORT OF WORKS^^^
-
 * Handling for Images DONE
+* Project Progress Bar DONE (9/28)
