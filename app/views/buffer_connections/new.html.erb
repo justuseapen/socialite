@@ -1,5 +1,10 @@
-<%- if devise_mapping.omniauthable? %>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider) %><br />
-  <% end -%>
-<% end -%>
+<div class="col-md-offset-1 col-md-10">
+	<div class="well">
+	<p>You need to connect to Buffer to use Socialite:</p>
+	<%- if devise_mapping.omniauthable? %>
+	  <%- resource_class.omniauth_providers.each do |provider| %>
+	    <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider) %><br />
+	  <% end -%>
+	<% end -%>
+	</div>
+</div>
