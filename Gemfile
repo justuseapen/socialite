@@ -31,6 +31,8 @@ end
 group :test do
   gem 'minitest-rails-capybara'
   gem 'minitest-reporters'
+  gem 'launchy'
+  gem 'webmock'
 end
 
 gem 'rails_12factor', group: :production
