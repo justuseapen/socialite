@@ -32,7 +32,11 @@ group :test do
   gem 'minitest-rails-capybara'
   gem 'minitest-reporters'
   gem 'launchy'
+  gem 'vcr'
   gem 'webmock'
+  gem 'mocha'
+  gem "shoulda-context"
+  gem "shoulda-matchers", require: false
 end
 
 gem 'rails_12factor', group: :production
