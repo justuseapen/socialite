@@ -17,6 +17,7 @@ gem 'font-awesome-rails'
 gem 'omniauth-buffer2'
 gem 'devise', '~> 3.4.0'
 gem 'nprogress-rails'
+gem 'mechanize'
 
 group :development do
   gem 'web-console'

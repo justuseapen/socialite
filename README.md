@@ -16,11 +16,36 @@ Get Feedback on These:
 Up Next
 =======
 
+# Hacker Practice Twitter Bot
+
+I want to make this bot. Every day it should dump the top 25 tweets from the previous day.
+
+Pre-Requisites:
+1. Select a profile to be the bot. (@justuseapen for now)
+2. Select a list for the bot to curate (make this)
+3. Select the time for list to be dumped every day (12pm the day after for now)
+4. 
+
+A Connected Buffer Account With the bot profile selected.
+
+## Nightly queue and buffer jobs
+
+1. Search for top tweets of the day from hacker sources
+2. Buffers top 25 tweets in tech to go out on 
+
+## BUILDING LISTS
+DAILY: AGENT ACCESSES (BuzzSumo)[https://app.buzzsumo.com/amplification/twitter-influencers]
+
+1. Mechanize ageny checks for new influencers in Startups, Business, etc. (Fishing Holes)
+2. Job adds top influncers first, then repeat until fail.
+
+
+
 # Test Suite Project
 
 ## Feature Tests
 1. User registers with email and password [✓]
-2. User connects new account to buffer []
+2. User connects new account to buffer [✓]
 3. User adds buffer profiles to Socialite []
 4. User creates a list []
 5. User adds twitter accounts to the list []
@@ -31,13 +56,20 @@ Up Next
 
 *Refactor the tests so that changes to copy don't break everything.*
 
+### User adds buffer profiles to Socialite []
+
+1. User creates an account
+2. User connects to buffer.
+3. Backend pulls bufferprofiles
+4. Backend creates profile records.
+5. User sees profiles on dashboard.
+
 ## Unit Tests
 1. User
 2. Buffer Account
 3. Buffer Profile
 4. List
 5. Twitter Account
-
 
 * On buffering from list view:
 	- for success: display tweet as green

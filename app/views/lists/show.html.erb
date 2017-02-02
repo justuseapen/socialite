@@ -20,7 +20,9 @@
  				</div>
  				<div class="account-details">
  					<div class="account-name">
- 						<p><%= account.name %>
+ 						<p>
+ 							<%= account.name %> 
+ 							<%= link_to fa_icon("times"), twitter_accounts_path(id: account.id), method: :delete %>
  						</p>
  					</div>
  					<div class="account-screenname">

@@ -12,6 +12,14 @@ class TwitterAccountsController < ApplicationController
 		redirect_to list_path(@list)
 	end
 
+	def destroy
+		@twitter_account = TwitterAccount.find(params[:id])
+		@list = @twitter_account.list_id
+		@twitter_account.destroy
+		flash[:success] = "You've removed #{@twitter_account.handle}!"
+		redirect_to lists_path(@list)
+	end
+
 	private
 	def twitter_account_params
 		params.require(:twitter_account).permit(:handle, :list_id)
