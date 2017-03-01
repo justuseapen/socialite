@@ -18,6 +18,7 @@ gem 'omniauth-buffer2'
 gem 'devise', '~> 3.4.0'
 gem 'nprogress-rails'
 gem 'mechanize'
+gem 'whenever', :require => false
 
 group :development do
   gem 'web-console'
